@@ -19,8 +19,8 @@ Audytuje wykorzystanie wskazanej grupy Active Directory w Obiektach Zasad Grupy 
 * **Wyróżniki**: Analizuje wiele kontekstów użycia grupy: filtrowanie zabezpieczeń, grupy ograniczone, przypisywanie praw użytkownika, kierowanie na poziomie elementu (Item-Level Targeting) w Preferencjach Zasad Grupy (GPP) oraz ogólne wystąpienia nazwy lub SID grupy w wygenerowanych raportach XML z GPO. Wyniki wymagające dodatkowej uwagi są odpowiednio oznaczane.
 
 ### `Audit-RedundantAndOrphanedPermissions.ps1`
-Przeprowadza kompleksowy audyt uprawnień w udziałach sieciowych, wykrywając i opcjonalnie usuwając uprawnienia dla kont osieroconych i wyłączonych, a także raportując nadmiarowe wpisy.
-* **Wyróżniki**: Identyfikuje trzy rodzaje problemów: osierocone SID-y, konta wyłączone w AD oraz nadmiarowe uprawnienia (użytkownik z prawami bezpośrednimi i poprzez grupę). Po analizie, skrypt wchodzi w interaktywną pętlę, pozwalając na selektywne usuwanie problematycznych uprawnień. Inteligentnie rozróżnia uprawnienia jawne od dziedziczonych, proponując usunięcie tylko tych, które nie spowodują problemów z dziedziczeniem.
+Audytuje i opcjonalnie usuwa uprawnienia do folderów dla kont osieroconych lub wyłączonych w AD.
+* **Wyróżniki**: Identyfikuje osierocone SID-y i wyłączone konta, raportuje ich dostęp w czytelny sposób, a następnie pozwala na interaktywne usuwanie problematycznych uprawnień. Inteligentnie rozróżnia prawa jawne od dziedziczonych, aby zapobiec problemom z odnawianiem się uprawnień.
 
 ### `Clean-DisabledUsersFromGroups.ps1`
 Identyfikuje i opcjonalnie usuwa użytkowników z wyłączonymi kontami z grup zabezpieczeń AD.
@@ -41,6 +41,10 @@ Wyszukuje, listuje i opcjonalnie usuwa "najwyższego poziomu" puste foldery w po
 ### `Find-Orphaned-HomeFolders.ps1`
 Wykrywa "osierocone" foldery domowe, czyli katalogi w podanej lokalizacji (np. `\\NAS\Users`), które nie mają przypisanego aktywnego użytkownika w Active Directory.
 * **Wyróżniki**: Skrypt interaktywnie pyta o ścieżkę do folderów domowych, pobiera listę aktywnych użytkowników z AD (SamAccountName) i porównuje ją z nazwami folderów. Oferuje zapis listy osieroconych folderów do pliku tekstowego (domyślnie na Pulpicie).
+
+### `Find-RedundantUserPermissions.ps1`
+Wykrywa i opcjonalnie usuwa nadmiarowe uprawnienia użytkowników, generując przy tym interaktywny raport HTML.
+* **Wyróżniki**: Znajduje sytuacje, w których użytkownik ma bezpośrednie prawa do folderu, mimo że należy do grupy, która również ma tam dostęp. Porównuje konkretne prawa (`FileSystemRights`), a następnie generuje estetyczny raport HTML z funkcją wyszukiwania. Posiada także opcję bezpiecznego usuwania zbędnych praw (tylko gdy są identyczne z grupowymi) po podwójnym potwierdzeniu.
 
 ### `Get-ChromeVersionFromDomain.ps1`
 Sprawdza wersję przeglądarki Google Chrome zainstalowanej na aktywnych komputerach w domenie Active Directory.
