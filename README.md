@@ -18,6 +18,10 @@ Przeprowadza szczegółowy audyt uprawnień grupy AD do folderów na udziałach 
 Audytuje wykorzystanie wskazanej grupy Active Directory w Obiektach Zasad Grupy (GPO) w całej domenie.
 * **Wyróżniki**: Analizuje wiele kontekstów użycia grupy: filtrowanie zabezpieczeń, grupy ograniczone, przypisywanie praw użytkownika, kierowanie na poziomie elementu (Item-Level Targeting) w Preferencjach Zasad Grupy (GPP) oraz ogólne wystąpienia nazwy lub SID grupy w wygenerowanych raportach XML z GPO. Wyniki wymagające dodatkowej uwagi są odpowiednio oznaczane.
 
+### `Audit-RedundantAndOrphanedPermissions.ps1`
+Przeprowadza kompleksowy audyt uprawnień w udziałach sieciowych, wykrywając i opcjonalnie usuwając uprawnienia dla kont osieroconych i wyłączonych, a także raportując nadmiarowe wpisy.
+* **Wyróżniki**: Identyfikuje trzy rodzaje problemów: osierocone SID-y, konta wyłączone w AD oraz nadmiarowe uprawnienia (użytkownik z prawami bezpośrednimi i poprzez grupę). Po analizie, skrypt wchodzi w interaktywną pętlę, pozwalając na selektywne usuwanie problematycznych uprawnień. Inteligentnie rozróżnia uprawnienia jawne od dziedziczonych, proponując usunięcie tylko tych, które nie spowodują problemów z dziedziczeniem.
+
 ### `Clean-DisabledUsersFromGroups.ps1`
 Identyfikuje i opcjonalnie usuwa użytkowników z wyłączonymi kontami z grup zabezpieczeń AD.
 * **Wyróżniki**: Optymalizuje proces pobierając listę wszystkich wyłączonych kont tylko raz, wyświetla pasek postępu podczas skanowania grup, a przed faktycznym usunięciem użytkowników z grup prosi o potwierdzenie operacji.
