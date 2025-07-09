@@ -46,6 +46,10 @@ Wykrywa "osierocone" foldery domowe, czyli katalogi w podanej lokalizacji (np. `
 Wykrywa i opcjonalnie usuwa nadmiarowe uprawnienia użytkowników, generując przy tym interaktywny raport HTML.
 * **Wyróżniki**: Znajduje sytuacje, w których użytkownik ma bezpośrednie prawa do folderu, mimo że należy do grupy, która również ma tam dostęp. Porównuje konkretne prawa (`FileSystemRights`), a następnie generuje estetyczny raport HTML z funkcją wyszukiwania. Posiada także opcję bezpiecznego usuwania zbędnych praw (tylko gdy są identyczne z grupowymi) po podwójnym potwierdzeniu.
 
+### `Get-ADUserLogonHistory.ps1`
+Wyszukuje i raportuje historię logowań użytkownika domenowego na podstawie dzienników zdarzeń kontrolera domeny.
+* **Wyróżniki**: Umożliwia zdefiniowanie okresu wyszukiwania w dniach, godzinach lub minutach. Wyświetla szczegółowy pasek postępu, który pokazuje postęp analizy krok po kroku. Oferuje wybór między "czystymi" wynikami (unikalne logowania do konkretnych maszyn) a "surowymi" danymi (wszystkie znalezione zdarzenia).
+
 ### `Get-ChromeVersionFromDomain.ps1`
 Sprawdza wersję przeglądarki Google Chrome zainstalowanej na aktywnych komputerach w domenie Active Directory.
 * **Wyróżniki**: Dla każdego komputera sprawdza dostępność (ping), weryfikuje komunikację WinRM (Test-WSMan) i jeśli jest potrzeba, pyta o zgodę na próbę zdalnej konfiguracji WinRM (`Enable-PSRemoting -Force`) oraz uruchomienia usługi. Próbuje również zdalnie zsynchronizować czas (`w32tm /resync /force`). Wersję Chrome ustala priorytetowo z pliku `chrome.exe` (w standardowych lokalizacjach) lub jako fallback z rejestru.
